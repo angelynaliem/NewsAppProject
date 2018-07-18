@@ -38,7 +38,7 @@ public class NewsappActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newsapp_activity);
 
-    ListView newsappListView = findViewById(R.id.list);
+        newsappListView = findViewById(R.id.list);
 
         mEmptyStateTextView = findViewById(R.id.empty_view);
         newsappListView.setEmptyView(mEmptyStateTextView);

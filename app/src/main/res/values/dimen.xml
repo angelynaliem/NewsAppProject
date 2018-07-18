@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="section_or_date_textsize">14sp</dimen>
+    <dimen name="title_textsize">20sp</dimen>
+
+
+</resources>
