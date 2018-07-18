@@ -18,13 +18,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsappActivity extends AppCompatActivity {
+public class NewsappActivity extends AppCompatActivity
+    implements LoaderCallbacks<List<Newsapp>> {
 
     public static final String LOG_TAG = NewsappActivity.class.getName();
 
     private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?api-key=78bba25c-bc42-400a-8c19-aba969fc0c2b";
 
-    private static final int EARTHQUAKE_LOADER_ID = 1;
+    private static final int NEWSAPP_LOADER_ID = 1;
 
     private NewsappAdapter mAdapter;
 
@@ -37,7 +38,7 @@ public class NewsappActivity extends AppCompatActivity {
 
     ListView newsappListView = findViewById(R.id.list);
 
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        mEmptyStateTextView = findViewById(R.id.empty_view);
         newsappListView.setEmptyView(mEmptyStateTextView);
 
     mAdapter = new NewsappAdapter(this, new ArrayList<Newsapp>());
@@ -95,7 +96,12 @@ public class NewsappActivity extends AppCompatActivity {
         if (newsapp != null && !newsapp.isEmpty()) {
 
             updateUi(newsapp);
+
         }
+    }
+
+    private void updateUi(List<Newsapp> newsapp) {
+        mEmptyStateTextView.setVisibility(View.GONE);
     }
 
     @Override
