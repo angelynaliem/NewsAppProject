@@ -111,21 +111,21 @@ public final class QueryUtils {
 
             JSONObject baseJsonResponse = new JSONObject(newsappJSON);
 
-            JSONArray newsappArray = baseJsonResponse.getJSONArray("response");
+            JSONObject newsJSONObject = baseJsonResponse.getJSONObject("response");
+
+            JSONArray newsappArray = newsJSONObject.getJSONArray("results");
 
             for (int i = 0; i < newsappArray.length(); i++) {
 
                 JSONObject currentNews = newsappArray.getJSONObject(i);
 
-                JSONObject results = currentNews.getJSONObject("results");
+                String section = currentNews.getString("sectionId");
 
-                String section = results.getString("sectionId");
+                String title = currentNews.getString("webTitle");
 
-                String title = results.getString("webTitle");
+                String date = currentNews.getString("webPublicationDate");
 
-                String date = results.getString("webPublicationDate");
-
-                String url = results.getString("webUrl");
+                String url = currentNews.getString("webUrl");
 
                 Newsapp newsapps = new Newsapp(section, title, date, url);
 

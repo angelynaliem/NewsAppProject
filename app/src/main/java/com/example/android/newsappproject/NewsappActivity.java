@@ -31,6 +31,8 @@ public class NewsappActivity extends AppCompatActivity
 
     private TextView mEmptyStateTextView;
 
+    ListView newsappListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +104,12 @@ public class NewsappActivity extends AppCompatActivity
 
     private void updateUi(List<Newsapp> newsapp) {
         mEmptyStateTextView.setVisibility(View.GONE);
+
+        mAdapter.clear();
+        mAdapter = new NewsappAdapter(this, newsapp);
+        newsappListView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+
     }
 
     @Override
