@@ -9,7 +9,7 @@
    android:padding="16dp">
 
         <TextView
-            android:id="@+id/section_textview"
+            android:id="@+id/title_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -20,13 +20,20 @@
             tools:text="startup" />
 
         <TextView
-            android:id="@+id/title_textview"
+            android:id="@+id/section_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
             android:textSize="@dimen/title_textsize"
             tools:text="The average age of successful entrepreneurs is 40" />
+
+    <TextView
+        android:id="@+id/author_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/section_or_date_textsize"
+        tools:text="Angelyn Liem" />
 
         <TextView
             android:id="@+id/date_textview"

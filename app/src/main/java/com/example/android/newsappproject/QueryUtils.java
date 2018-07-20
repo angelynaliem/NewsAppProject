@@ -67,45 +67,45 @@ public final class QueryUtils {
             urlConnection.connect();
 
             if (urlConnection.getResponseCode() == 200) {
-               inputStream = urlConnection.getInputStream();
-           jsonResponse = readFromStream(inputStream);
-             } else {
-             Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
-              }
-           } catch (IOException e) {
-      Log.e(LOG_TAG, "Problem retrieving the newsapp JSON results.", e);
-          } finally {
-        if (urlConnection != null) {
-                  urlConnection.disconnect();
-                 }
-          if (inputStream != null) {
-            inputStream.close();
-                      }
-               }
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving the newsapp JSON results.", e);
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
         return jsonResponse;
-         }
+    }
 
-      private static String readFromStream(InputStream inputStream) throws IOException {
-          StringBuilder output = new StringBuilder();
+    private static String readFromStream(InputStream inputStream) throws IOException {
+        StringBuilder output = new StringBuilder();
         if (inputStream != null) {
-         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
-                BufferedReader reader = new BufferedReader(inputStreamReader);
-                 String line = reader.readLine();
-             while (line != null) {
-                 output.append(line);
-               line = reader.readLine();
-                   }
-             }
-     return output.toString();
-       }
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                output.append(line);
+                line = reader.readLine();
+            }
+        }
+        return output.toString();
+    }
 
     private static List<Newsapp> extractResponseFromJson(String newsappJSON) {
         if (TextUtils.isEmpty(newsappJSON)) {
 
             return null;
- }
+        }
 
- List<Newsapp> newsapp = new ArrayList<>();
+        List<Newsapp> newsapp = new ArrayList<>();
 
         try {
 
@@ -127,10 +127,16 @@ public final class QueryUtils {
 
                 String url = currentNews.getString("webUrl");
 
-                Newsapp newsapps = new Newsapp(section, title, date, url);
+                JSONArray authorArray = currentNews.getJSONArray("tags");
 
-                newsapp.add(newsapps);
-            }
+                JSONObject currentAuthor = authorArray.getJSONObject(0);
+
+                String author = currentAuthor.getString("webTitle");
+
+                    Newsapp newsapps = new Newsapp(title, section, date, author, url);
+
+                    newsapp.add(newsapps);
+                }
 
         } catch (JSONException e) {
 
