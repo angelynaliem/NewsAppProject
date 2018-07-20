@@ -5,10 +5,12 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -86,7 +88,26 @@ public class NewsappActivity extends AppCompatActivity
     @Override
     public Loader<List<Newsapp>> onCreateLoader(int i, Bundle bundle) {
 
-        return new NewsappLoader(this, GUARDIAN_REQUEST_URL);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String numberOfArticles = sharedPreferences.getString(getString(R.string.settings_number_of_articles_key), getString(R.string.settings_number_of_articles_default));
+
+        String orderBy  = sharedPreferences.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
+        Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
+
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("numberOfArticles", numberOfArticles);
+
+        uriBuilder.appendQueryParameter("orderby", "time");
+
+        uriBuilder.appendQueryParameter("orderby", orderBy);
+
+        return new NewsappLoader(this, uriBuilder.toString());
     }
 
     @Override
