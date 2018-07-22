@@ -129,9 +129,20 @@ public final class QueryUtils {
 
                 JSONArray authorArray = currentNews.getJSONArray("tags");
 
-                JSONObject currentAuthor = authorArray.getJSONObject(0);
+                String author = "-";
 
-                String author = currentAuthor.getString("webTitle");
+                try {
+
+                    JSONObject currentAuthor = authorArray.getJSONObject(0);
+
+                    author = currentAuthor.getString("webTitle");
+                }
+
+                catch (Exception e){
+
+                    e.printStackTrace();
+
+                }
 
                     Newsapp newsapps = new Newsapp(title, section, date, author, url);
 

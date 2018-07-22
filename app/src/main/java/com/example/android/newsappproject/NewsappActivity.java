@@ -27,7 +27,7 @@ public class NewsappActivity extends AppCompatActivity
 
     public static final String LOG_TAG = NewsappActivity.class.getName();
 
-    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?&show-tags=contributor&q=%27tech%27&api-key=78bba25c-bc42-400a-8c19-aba969fc0c2b";
+    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?";
 
     private static final int NEWSAPP_LOADER_ID = 1;
 
@@ -101,11 +101,15 @@ public class NewsappActivity extends AppCompatActivity
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("numberOfArticles", numberOfArticles);
+        uriBuilder.appendQueryParameter("format", "json");
 
-        uriBuilder.appendQueryParameter("orderby", "time");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
 
-        uriBuilder.appendQueryParameter("orderby", orderBy);
+        uriBuilder.appendQueryParameter("page-size", numberOfArticles);
+
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+
+        uriBuilder.appendQueryParameter("api-key", "78bba25c-bc42-400a-8c19-aba969fc0c2b");
 
         return new NewsappLoader(this, uriBuilder.toString());
     }
