@@ -7,7 +7,7 @@
 
     <string name="settings_number_of_article_label">No. of articles</string>
     <string name="settings_number_of_articles_key" translatable="false">page_size</string>
-    <string name="settings_number_of_articles_default" translatable="false">0</string>
+    <string name="settings_number_of_articles_default" translatable="false">1</string>
 
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>

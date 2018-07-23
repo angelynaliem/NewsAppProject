@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,8 @@ public class NewsappActivity extends AppCompatActivity
         uriBuilder.appendQueryParameter("order-by", orderBy);
 
         uriBuilder.appendQueryParameter("api-key", "78bba25c-bc42-400a-8c19-aba969fc0c2b");
+
+        Toast.makeText(this, ""+uriBuilder.toString(), Toast.LENGTH_LONG).show();
 
         return new NewsappLoader(this, uriBuilder.toString());
     }
